@@ -1,0 +1,14 @@
+[Options]
+BootDelay=0
+BootGUI=0
+BootKeys=1
+BootMenu=0
+DoubleBuffer=0
+DBLSpace=0
+DRVSpace=0
+Logo=0
+Network=0
+DisableLog=1
+
+;SYS
+

@@ -1,0 +1,64 @@
+[menu]
+menuitem=NORMAL, Start
+menuitem=XMGR,  With XMGR 
+menuitem=EMM386, With EMM386 Support
+menuitem=UMBPCI, With UMBPCI Support
+menuitem=CLEAN, Fail Safe
+menudefault=NORMAL,10
+menucolor=7,0
+
+[FHIMEM]
+device=\bin\himem.sys /testmem:off
+
+[XMGR]
+device=\bin\xmgr.sys /N80
+
+[FCD]
+DEVICEHIGH=\bin\cddrv1.SYS /D:cd001
+;DEVICE=\bin\cddrv1.sys /D:cd002
+DEVICEHIGH=\bin\cddrv2.SYS /D:cd003
+;DEVICE=\bin\cddrv2.SYS /D:cd004
+
+[EMM386]
+INCLUDE FHIMEM
+DEVICE=\bin\EMM386.EXE RAM
+
+[UMBPCI]
+DEVICE=\bin\umbpci.sys
+DEVICE=\bin\xmgr.sys /W /N80
+
+[cd]
+include FHIMEM
+INCLUDE FCD
+
+[CLEAN]
+;device=\bin\himem.sys /testmem:on
+
+[NORMAL]
+INCLUDE FHIMEM
+
+
+[EMMCD]
+INCLUDE EMM386
+INCLUDE FCD
+
+[UMBCD]
+include UMBPCI
+include FCD
+
+[DEBUG]
+INCLUDE EMMCD
+
+[COMMON]
+files=40	
+buffers=40
+dos=high,umb
+stacks=9,256
+lastdrive=z
+break=on
+numlock=off
+fcbs=10
+;SWITCHES=/F /K /N /W
+SWITCHES=/F
+SHELL=\command.com /E:4096 /P
+    
